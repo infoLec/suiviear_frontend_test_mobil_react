@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box, List, ListItem, Typography, IconButton } from '@mui/material';
+import { Box, List, ListItem, Typography } from '@mui/material';
 
 import { Phone } from '@mui/icons-material';
 
@@ -22,6 +22,14 @@ export class CommandInfo extends React.Component {
             },
             {
                 name: 'Reference',
+                element: (
+                    <Typography variant="h6" component="div">
+                        {'GA Montlucon Chateau'}
+                    </Typography>
+                )
+            },
+            {
+                name: 'client',
                 element: (
                     <Typography variant="h6" component="div">
                         {'GA Montlucon Chateau'}
