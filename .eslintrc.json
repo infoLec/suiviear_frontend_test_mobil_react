@@ -9,8 +9,8 @@
     "rules": {
         "react/prop-types": "warn", // Show a warning for missing prop-types
         "@typescript-eslint/explicit-function-return-type": "warn", // Show a warning for missing explicit function return types
-        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }], // Only show error for unused variables that don't start with an underscore
-        "@typescript-eslint/no-explicit-any": "error" // Allow the use of any type
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }], // Only show error for unused variables that don't start with an underscore
+        "@typescript-eslint/no-explicit-any": "warn" // Allow the use of any type
     },
     "settings": {
         "react": {

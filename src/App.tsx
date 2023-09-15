@@ -1,7 +1,7 @@
 import React from 'react';
-import { MobilView } from './views/MobilView';
+import MobilView from './views/MobilView';
 
-function App() {
+function App(): JSX.Element {
     return (
         <MobilView
             isDarkTheme={false}

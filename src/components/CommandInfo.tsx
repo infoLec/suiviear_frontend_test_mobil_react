@@ -1,54 +1,66 @@
 import * as React from 'react';
 
-import { Box, List, ListItem, Typography } from '@mui/material';
+import { Box, List, ListItem, Typography, Chip } from '@mui/material';
 
 import { Phone } from '@mui/icons-material';
+import { Commande } from '../types/Commande';
 
 type items = {
     name: string | React.ReactNode;
     element: React.ReactNode;
 };
 
-export class CommandInfo extends React.Component {
-    render() {
+type props = {
+    commande: Commande;
+};
+
+export default class CommandInfo extends React.Component<props> {
+    render(): React.ReactNode {
         const items: items[] = [
             {
                 name: 'Commande',
                 element: (
                     <Typography variant="h6" component="div">
-                        {'024450'}
+                        {this.props.commande.cde}
                     </Typography>
                 )
             },
             {
                 name: 'Reference',
-                element: (
-                    <Typography variant="h6" component="div">
-                        {'GA Montlucon Chateau'}
-                    </Typography>
-                )
+                element: <Typography component="div">{this.props.commande.reference}</Typography>
             },
             {
                 name: 'client',
-                element: (
-                    <Typography variant="h6" component="div">
-                        {'GA Montlucon Chateau'}
-                    </Typography>
-                )
+                element: <Typography component="p">{this.props.commande.client}</Typography>
             },
             {
                 name: 'adresse',
-                element: (
-                    <Typography variant="h6" component="div">
-                        {'15100 ST FLOUR'}
-                    </Typography>
-                )
+                element:
+                    this.props.commande.address.street2 !== null &&
+                    (this.props.commande.address.zip !== null ||
+                        this.props.commande.address.city != null) ? (
+                        <>
+                            <Typography component="p">
+                                {this.props.commande.address.street2}
+                            </Typography>
+                            <Typography component="p">
+                                {this.props.commande.address.zip} {this.props.commande.address.city}
+                            </Typography>
+                        </>
+                    ) : null
             },
             {
-                name: <Phone />,
+                name: '',
                 element: (
-                    <Typography variant="h6" component="div">
-                        {'M. MELOUX 0470037358'}
+                    <Typography component="div">
+                        {this.props.commande.address.tel !== null ? (
+                            <Chip
+                                variant="outlined"
+                                color="primary"
+                                icon={<Phone />}
+                                label={this.props.commande.address.tel}
+                            />
+                        ) : null}
                     </Typography>
                 )
             }
@@ -67,7 +79,6 @@ export class CommandInfo extends React.Component {
                         <ListItem
                             sx={{
                                 width: '100%',
-
                                 justifyContent: 'space-between'
                             }}
                             key={index}>

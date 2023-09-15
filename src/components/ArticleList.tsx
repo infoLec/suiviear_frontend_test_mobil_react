@@ -7,52 +7,36 @@ import {
     // Typography,
     Table
 } from '@mui/material';
-import { ArticleElement } from './ArticleElement';
+import ArticleElement from './ArticleElement';
+import { Article } from '../types/Article';
 // const header = ['Article', 'ligne', 'quantité', 'délai', 'expédition'];
-export class ArticleList extends React.Component {
+
+type props = {
+    articles: Article[];
+};
+export default class ArticleList extends React.Component<props> {
     render(): React.ReactNode {
         return (
             <Container
-                maxWidth="md"
+                maxWidth="lg"
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     overflow: 'auto', // added overflow property
-                    maxHeight: '400px',
+                    overflowX: 'hidden',
+                    height: '375px',
                     border: '1px solid black',
                     borderRadius: '5px'
+                    // width: '100%'
                 }}>
                 <Table
                     sx={{
-                        width: 'auto'
+                        width: '100%'
                     }}>
-                    {
-                        /* <TableRow>
-                        {header.map((item, index) => (
-                            <TableCell key={index}>
-                                <Typography>{item}</Typography>
-                            </TableCell>
-                        ))}
-                    </TableRow> */
-
-                        Array.from({ length: 10 }).map((_, index) => (
-                            <ArticleElement
-                                key={index}
-                                article={{
-                                    code: '-COFSP-1R7562M',
-                                    ligne: 32,
-                                    quantite: 1,
-                                    delai: new Date('2021-10-01T00:00:00.000Z'),
-                                    expedition: {
-                                        dateExp: new Date('2021-10-01T00:00:00.000Z'),
-                                        dejaExp: 0
-                                    },
-                                    valid: true
-                                }}
-                            />
-                        ))
-                    }
+                    {this.props.articles.map((article: Article, index) => (
+                        <ArticleElement key={index} article={article} />
+                    ))}
                 </Table>
             </Container>
         );
