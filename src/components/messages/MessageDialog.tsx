@@ -20,6 +20,7 @@ import MessageBubble from './part/MessageBubble';
 import { MessageOperation } from '../../tools/operation';
 import { Commande } from '../../types/Commande';
 import { DelaiOperation } from '../../tools/operation';
+import DataManager from '../../services/dataManager';
 type Props = {
     onClose: () => void;
     open: boolean;
@@ -41,7 +42,10 @@ export default class MessageDialog extends React.Component<Props, State> {
         super(props);
         this.state = {
             open: false,
-            messages: this.props.commande.cde.messages ? this.props.commande.cde.messages : [],
+            messages:
+                this.props.commande.cde.messages !== undefined
+                    ? this.props.commande.cde.messages
+                    : [],
             writting: ''
         };
     }
@@ -53,23 +57,48 @@ export default class MessageDialog extends React.Component<Props, State> {
         }
     };
 
+    componentDidUpdate(
+        prevProps: Readonly<Props>,
+        prevState: Readonly<State>,
+        snapshot?: any
+    ): void {
+        if (prevProps.open !== this.props.open) {
+            this.setState({
+                open: this.props.open
+            });
+        }
+        if (prevProps.commande.cde.messages !== this.props.commande.cde.messages) {
+            this.setState({
+                messages:
+                    this.props.commande.cde.messages !== undefined
+                        ? this.props.commande.cde.messages
+                        : []
+            });
+        }
+        this.srcoollToBottom();
+    }
     addMessage = (): void => {
         if (this.state.writting !== '') {
-            this.setState({
-                messages: [
-                    ...this.state.messages,
-                    {
-                        rep: this.props.commande.repName,
-                        message: this.state.writting,
-                        spAccount: this.props.userEmail,
-                        createdAt: new Date(),
-                        pbDelai: DelaiOperation.pbDelaibyCommande(this.props.commande.cde),
-                        cde: this.props.commande.cde.cde,
-                        isRead: false
-                    }
-                ],
-                writting: ''
-            });
+            const newMessage: Message = {
+                rep: this.props.commande.repName,
+                message: this.state.writting,
+                spAccount: this.props.userEmail,
+                createdAt: new Date(),
+                pbDelai: DelaiOperation.pbDelaibyCommande(this.props.commande.cde),
+                cde: this.props.commande.cde.cde,
+                isRead: false
+            };
+
+            DataManager.createMessage(newMessage)
+                .then(() => {
+                    this.setState({
+                        writting: '',
+                        messages: [...this.state.messages, newMessage]
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
 
         this.srcoollToBottom();
@@ -131,7 +160,7 @@ export default class MessageDialog extends React.Component<Props, State> {
                             <TextField
                                 multiline
                                 value={this.state.writting}
-                                onChange={(e) => this.setState({ writting: e.target.value })}
+                                onChange={(e): void => this.setState({ writting: e.target.value })}
                             />
                         </FormControl>
                         <Button
