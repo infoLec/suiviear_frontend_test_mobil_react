@@ -4,10 +4,10 @@ import { TableCell, TableRow, Tooltip, IconButton, Typography } from '@mui/mater
 import * as React from 'react';
 import { SxProps } from '@mui/system';
 
-import { Article } from '../types/Article';
+import { Article } from '../../types/Article';
 import { red } from '@mui/material/colors';
-import { DelaiOperation } from '../tools/operation';
-import { dateFormate } from '../tools/formate';
+import { DelaiOperation } from '../../tools/operation';
+import { dateFormate } from '../../tools/formate';
 
 type cell = {
     name: React.ReactNode;

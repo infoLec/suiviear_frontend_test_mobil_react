@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Box, List, ListItem, Typography, Chip } from '@mui/material';
 
 import { Phone } from '@mui/icons-material';
-import { Commande } from '../types/Commande';
+import { Commande } from '../../types/Commande';
 
 type items = {
     name: string | React.ReactNode;

@@ -22,11 +22,11 @@ import {
 import CommandInfo from './CommandInfo';
 import MailDialog from './mails/MailDialog';
 import MessageDialog from './messages/MessageDialog';
-import FoundCommand from '../FoundCommand/FoundComand';
-import { Representant } from '../types/Representant';
-import { Commande } from '../types/Commande';
+import FoundCommand from './FoundComand';
+import { Representant } from '../../types/Representant';
+import { Commande } from '../../types/Commande';
 import ArticleList from './ArticleList';
-import DataManager from '../services/dataManager';
+import DataManager from '../../services/dataManager';
 
 type props = {
     reps: Representant[];

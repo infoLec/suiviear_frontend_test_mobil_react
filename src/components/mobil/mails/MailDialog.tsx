@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DataManager from '../../services/dataManager';
+import DataManager from '../../../services/dataManager';
 import {
     Dialog,
     TextField,

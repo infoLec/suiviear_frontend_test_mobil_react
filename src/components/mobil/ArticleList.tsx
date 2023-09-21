@@ -8,7 +8,7 @@ import {
     Table
 } from '@mui/material';
 import ArticleElement from './ArticleElement';
-import { Article } from '../types/Article';
+import { Article } from '../../types/Article';
 // const header = ['Article', 'ligne', 'quantité', 'délai', 'expédition'];
 
 type props = {

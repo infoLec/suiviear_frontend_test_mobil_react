@@ -14,13 +14,13 @@ import {
     ListItem
 } from '@mui/material';
 import { Close as CloseIcon, Send } from '@mui/icons-material';
-import { Message } from '../../types/Message';
+import { Message } from '../../../types/Message';
 import { grey } from '@mui/material/colors';
 import MessageBubble from './part/MessageBubble';
-import { MessageOperation } from '../../tools/operation';
-import { Commande } from '../../types/Commande';
-import { DelaiOperation } from '../../tools/operation';
-import DataManager from '../../services/dataManager';
+import { MessageOperation } from '../../../tools/operation';
+import { Commande } from '../../../types/Commande';
+import { DelaiOperation } from '../../../tools/operation';
+import DataManager from '../../../services/dataManager';
 type Props = {
     onClose: () => void;
     open: boolean;

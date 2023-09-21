@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { Avatar, Box, Container, Typography } from '@mui/material';
 import { blue, grey, red } from '@mui/material/colors';
-import { Message } from '../../../types/Message';
-import { dateFormate } from '../../../tools/formate';
+import { Message } from '../../../../types/Message';
+import { dateFormate } from '../../../../tools/formate';
 
 type props = {
     message: Message;
