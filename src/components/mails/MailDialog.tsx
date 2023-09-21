@@ -1,4 +1,5 @@
 import * as React from 'react';
+import DataManager from '../../services/dataManager';
 import {
     Dialog,
     TextField,
@@ -19,6 +20,13 @@ type Props = {
     usermail: string;
     onClose: () => void;
     type: 'AR' | 'BL';
+    cde: string;
+    // mailerInfo: {
+    //     to: string;
+    //     cc: string;
+    //     subject: string;
+    //     body: string;
+    // };
 };
 
 type State = {

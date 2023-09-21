@@ -26,6 +26,7 @@ import FoundCommand from '../FoundCommand/FoundComand';
 import { Representant } from '../types/Representant';
 import { Commande } from '../types/Commande';
 import ArticleList from './ArticleList';
+import DataManager from '../services/dataManager';
 
 type props = {
     reps: Representant[];
@@ -79,6 +80,43 @@ export default class MainComponent extends React.Component<props, state> {
             }
         };
     }
+
+    // getMailInfo = (
+    //     type: 'AR' | 'BL',
+    //     cde: string
+    // ): {
+    //     to: string;
+    //     cc: string;
+    //     subject: string;
+    //     body: string;
+    // } => {
+    //     const req: Promise<any> =
+    //             type === 'BL' ? DataManager.getMailerInfoBL(cde) : DataManager.getMailerInfo(cde),
+    //         mailInfo: {
+    //             to: string;
+    //             cc: string;
+    //             subject: string;
+    //             body: string;
+    //         } = {
+    //             to: '',
+    //             cc: '',
+    //             subject: '',
+    //             body: ''
+    //         };
+
+    //     req.then((res: any) => {
+    //         console.log(res);
+    //         mailInfo.to = res.data.to;
+    //         mailInfo.cc = this.props.usermail;
+    //         mailInfo.subject = res.data.subject;
+    //         mailInfo.body = res.data.body;
+    //     }).catch((err: any) => {
+    //         console.log(err);
+    //     });
+
+    //     console.log(mailInfo);
+    //     return mailInfo;
+    // };
 
     onClose = (): void => {
         this.setState({ mailDialog: { open: false, type: 'AR' } });
@@ -216,6 +254,12 @@ export default class MainComponent extends React.Component<props, state> {
                         type={this.state.mailDialog.type}
                         onClose={this.onClose}
                         usermail={this.props.usermail}
+                        cde={this.state.commandClicked.cde.cde}
+                        // mailerInfo={
+                        //     this.state.mailDialog.type === 'BL'
+                        //         ? this.getMailInfo('BL', this.state.commandClicked.cde.cde)
+                        //         : this.getMailInfo('AR', this.state.commandClicked.cde.cde)
+                        // }
                     />
 
                     <MessageDialog
