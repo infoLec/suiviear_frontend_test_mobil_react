@@ -35,6 +35,27 @@ export class DelaiOperation {
         });
         return count;
     };
+
+    public static newCommande = (commande: Commande): boolean => {
+        return commande.articles.some(
+            (article) =>
+                article.delai?.getTime() !== article.precedent?.getTime() &&
+                article.valid &&
+                !article.precedent
+        );
+    };
+
+    // showIfAlert(): boolean {
+    //     return this.state.commande.articles.some(
+    //         (article) => article.delai?.getTime() !== article.precedent?.getTime() && article.valid
+    //     );
+    // }
+    // showIfNew(): boolean {
+    //     return this.state.commande.articles.some(
+    //         (article) =>
+    //             article.delai?.getTime() !== article.precedent?.getTime() && article.valid && !article.precedent
+    //     );
+    // }
 }
 
 export class MessageOperation {
@@ -42,16 +63,27 @@ export class MessageOperation {
         return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
     };
 
+    public static numberOfUnreadByCde = (cdes: Commande, userEmail: string): number => {
+        let count = 0;
+        cdes.messages?.forEach((message) => {
+            if (message.isRead === false && message.spAccount !== userEmail) {
+                count++;
+            }
+        });
+
+        return count;
+    };
+
     public static numberOdCdeWithUnRead = (cdes: Commande[], userEmail: string): number => {
         let count = 0;
-        cdes.forEach((cde: Commande) => {
-            cde.messages?.forEach((message) => {
-                if (message.isRead === false && message.spAccount !== userEmail) {
-                    count++;
-                }
-            });
+        cdes.forEach((cde) => {
+            if (MessageOperation.numberOfUnreadByCde(cde, userEmail) > 0) {
+                count++;
+            }
         });
 
         return count;
     };
 }
+
+// 024822

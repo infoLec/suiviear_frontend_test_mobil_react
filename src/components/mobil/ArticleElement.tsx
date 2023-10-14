@@ -88,7 +88,7 @@ export default class ArticleElement extends React.Component<
     }
 
     render(): React.ReactNode {
-        const { code, quantite, delai, ligne } = this.props.article;
+        const { code, quantite, delai, ligne, precedent } = this.props.article;
         const cells: cell[] = [
             {
                 name: code,
@@ -118,12 +118,12 @@ export default class ArticleElement extends React.Component<
                 }
             },
             {
-                name: delai ? (
+                name: precedent ? (
                     <Tooltip
                         placement="top"
                         open={this.state.onpenDelaiTooltip}
                         onClose={() => this.setState({ onpenDelaiTooltip: false })}
-                        title={dateFormate(delai)}>
+                        title={dateFormate(precedent)}>
                         <Typography
                             onClick={() =>
                                 this.setState({ onpenDelaiTooltip: !this.state.onpenDelaiTooltip })
@@ -134,11 +134,28 @@ export default class ArticleElement extends React.Component<
                                 margin: 0
                             }}
                             variant="button">
-                            {dateFormate(delai)}
+                            {delai && dateFormate(delai)}
                         </Typography>
                     </Tooltip>
                 ) : (
-                    'Pas de date'
+                    <Tooltip
+                        placement="top"
+                        open={this.state.onpenDelaiTooltip}
+                        onClose={() => this.setState({ onpenDelaiTooltip: false })}
+                        title={'pas de précédent'}>
+                        <Typography
+                            onClick={() =>
+                                this.setState({ onpenDelaiTooltip: !this.state.onpenDelaiTooltip })
+                            }
+                            sx={{
+                                padding: 0,
+                                minWidth: 0,
+                                margin: 0
+                            }}
+                            variant="button">
+                            {delai && dateFormate(delai)}
+                        </Typography>
+                    </Tooltip>
                 ),
                 sx: {
                     backgroundColor: DelaiOperation.pbDelai(this.props.article)
